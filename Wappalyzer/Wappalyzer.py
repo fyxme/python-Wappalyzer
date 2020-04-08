@@ -65,6 +65,10 @@ class WebPage:
                     'meta', attrs=dict(name=True, content=True))
         }
 
+        _tmp_title = soup.select("html head title")
+        if _tmp_title and len(_tmp_title):
+            self.title = _tmp_title[0].get_text()
+
     @classmethod
     def new_from_url(cls, url: str, verify: bool = True, timeout: Union[int, float] = 2.5):
         """
