@@ -6,7 +6,7 @@ import logging
 import pkg_resources
 
 import aiohttp
-import requests
+import requests as rqst
 
 from bs4 import BeautifulSoup
 from typing import Union
@@ -70,7 +70,7 @@ class WebPage:
             self.title = _tmp_title[0].get_text()
 
     @classmethod
-    def new_from_url(cls, url: str, verify: bool = True, timeout: Union[int, float] = 2.5):
+    def new_from_url(cls, url: str, verify: bool = True, timeout: Union[int, float] = 2.5, requests=rqst):
         """
         Constructs a new WebPage object for the URL,
         using the `requests` module to fetch the HTML.
@@ -81,7 +81,7 @@ class WebPage:
         url : str
         verify: bool
         """
-        response = requests.get(url, verify=verify, timeout=timeout)
+        response = requests.get(url)
         return cls.new_from_response(response)
 
     @classmethod
